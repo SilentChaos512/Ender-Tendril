@@ -30,7 +30,7 @@ authors="SilentChaos512"
     side="BOTH"
 [[dependencies.endertendril]]
     modId="silentlib"
-    mandatory=true
+    mandatory=false
     versionRange="[4.7,)"
     ordering="NONE"
     side="BOTH"

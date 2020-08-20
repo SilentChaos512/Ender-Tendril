@@ -12,6 +12,8 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.ForgeHooks;
 import net.silentchaos512.endertendril.setup.ModBlocks;
 import net.silentchaos512.endertendril.setup.ModTags;
 
@@ -19,10 +21,10 @@ import java.util.Random;
 
 public class EnderTendrilTopBlock extends AbstractTopPlantBlock {
     private static final VoxelShape SHAPE = Block.makeCuboidShape(4.0D, 9.0D, 4.0D, 12.0D, 16.0D, 12.0D);
+    public static final double GROWTH_CHANCE = 0.1;
 
     public EnderTendrilTopBlock(Properties properties) {
-        // TODO: reduce growth chance
-        super(properties, Direction.DOWN, SHAPE, false, 0.1);
+        super(properties, Direction.DOWN, SHAPE, false, GROWTH_CHANCE);
     }
 
     @Override
@@ -38,6 +40,24 @@ public class EnderTendrilTopBlock extends AbstractTopPlantBlock {
     @Override
     protected boolean canGrowIn(BlockState state) {
         return PlantBlockHelper.isAir(state);
+    }
+
+    @Override
+    public boolean ticksRandomly(BlockState state) {
+        // Never stop growing as long as space is available
+        return true;
+    }
+
+    @Override
+    public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
+        // Removes the age check from super
+        if (ForgeHooks.onCropsGrowPre(worldIn, pos.offset(this.growthDirection), worldIn.getBlockState(pos.offset(this.growthDirection)),random.nextDouble() < GROWTH_CHANCE)) {
+            BlockPos blockpos = pos.offset(this.growthDirection);
+            if (this.canGrowIn(worldIn.getBlockState(blockpos))) {
+                worldIn.setBlockState(blockpos, state.func_235896_a_(AGE));
+                ForgeHooks.onCropsGrowPost(worldIn, blockpos, worldIn.getBlockState(blockpos));
+            }
+        }
     }
 
     @Override
@@ -95,6 +115,7 @@ public class EnderTendrilTopBlock extends AbstractTopPlantBlock {
             state1 = worldIn.getBlockState(pos1);
         }
 
+        // Destroy the topmost block to take down the whole tendril
         worldIn.destroyBlock(pos1.down(), false);
     }
 }
