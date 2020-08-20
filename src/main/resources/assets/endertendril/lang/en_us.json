@@ -1,4 +1,7 @@
 {
-  "block.endertendril.example_block": "Example Block",
-  "item.endertendril.example_item": "Example Item"
+  "block.endertendril.ender_tendril": "Ender Tendril",
+  "block.endertendril.ender_tendril_plant": "Ender Tendril",
+  "block.endertendril.flowering_ender_tendril": "Flowering Ender Tendril",
+  "item.endertendril.ender_tendril_seed": "Ender Tendril Seed",
+  "item.endertendril.tendril_pearl": "Tendril Pearl"
 }

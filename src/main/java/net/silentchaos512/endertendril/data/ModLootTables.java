@@ -82,12 +82,12 @@ public class ModLootTables extends LootTableProvider {
     private static final class Chests extends ChestLootTables {
         @Override
         public void accept(BiConsumer<ResourceLocation, LootTable.Builder> consumer) {
-            consumer.accept(LootInjector.Tables.CHESTS_ABANDONED_MINESHAFT, addSeeds(9));
-            consumer.accept(LootInjector.Tables.CHESTS_BURIED_TREASURE, addSeeds(7));
-            consumer.accept(LootInjector.Tables.CHESTS_END_CITY_TREASURE, addSeeds(3));
-            consumer.accept(LootInjector.Tables.CHESTS_SHIPWRECK_TREASURE, addSeeds(9));
-            consumer.accept(LootInjector.Tables.CHESTS_STRONGHOLD_CORRIDOR, addSeeds(5));
-            consumer.accept(LootInjector.Tables.CHESTS_STRONGHOLD_CROSSING, addSeeds(5));
+            consumer.accept(LootInjector.Tables.CHESTS_ABANDONED_MINESHAFT, addSeeds(7));
+            consumer.accept(LootInjector.Tables.CHESTS_BURIED_TREASURE, addSeeds(4));
+            consumer.accept(LootInjector.Tables.CHESTS_END_CITY_TREASURE, addSeeds(2));
+            consumer.accept(LootInjector.Tables.CHESTS_SHIPWRECK_TREASURE, addSeeds(5));
+            consumer.accept(LootInjector.Tables.CHESTS_STRONGHOLD_CORRIDOR, addSeeds(2));
+            consumer.accept(LootInjector.Tables.CHESTS_STRONGHOLD_CROSSING, addSeeds(3));
         }
 
         private static LootTable.Builder addSeeds(int emptyWeight) {

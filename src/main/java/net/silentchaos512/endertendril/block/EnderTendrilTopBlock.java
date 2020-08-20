@@ -21,7 +21,7 @@ import java.util.Random;
 
 public class EnderTendrilTopBlock extends AbstractTopPlantBlock {
     private static final VoxelShape SHAPE = Block.makeCuboidShape(4.0D, 9.0D, 4.0D, 12.0D, 16.0D, 12.0D);
-    public static final double GROWTH_CHANCE = 0.1;
+    private static final double GROWTH_CHANCE = 0.05;
 
     public EnderTendrilTopBlock(Properties properties) {
         super(properties, Direction.DOWN, SHAPE, false, GROWTH_CHANCE);
