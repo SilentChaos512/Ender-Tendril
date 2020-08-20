@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "": {
+            "model": "endertendril:block/example_block"
+        }
+    }
+}

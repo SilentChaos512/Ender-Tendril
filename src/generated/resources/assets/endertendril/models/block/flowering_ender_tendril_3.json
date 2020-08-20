@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "endertendril:block/flowering_ender_tendril_3"
+  }
+}
