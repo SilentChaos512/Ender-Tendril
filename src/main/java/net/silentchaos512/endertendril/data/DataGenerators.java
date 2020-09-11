@@ -1,7 +1,7 @@
 package net.silentchaos512.endertendril.data;
 
 import net.minecraft.data.DataGenerator;
-import net.minecraftforge.client.model.generators.ExistingFileHelper;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 
 public final class DataGenerators {
@@ -11,9 +11,9 @@ public final class DataGenerators {
         DataGenerator gen = event.getGenerator();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
-        ModBlockTagsProvider blocks = new ModBlockTagsProvider(gen);
+        ModBlockTagsProvider blocks = new ModBlockTagsProvider(gen, existingFileHelper);
         gen.addProvider(blocks);
-        gen.addProvider(new ModItemTagsProvider(gen, blocks));
+        gen.addProvider(new ModItemTagsProvider(gen, blocks, existingFileHelper));
 
         gen.addProvider(new ModLootTables(gen));
         gen.addProvider(new ModRecipesProvider(gen));
