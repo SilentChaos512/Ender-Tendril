@@ -61,7 +61,7 @@ public class EnderTendrilTopBlock extends AbstractTopPlantBlock {
     }
 
     @Override
-    protected Block func_230330_d_() {
+    protected Block getBodyPlantBlock() {
         return ModBlocks.ENDER_TENDRIL_PLANT.get();
     }
 
@@ -73,7 +73,7 @@ public class EnderTendrilTopBlock extends AbstractTopPlantBlock {
         for (int i = 1; i < 4; ++i) {
             BlockState state = worldIn.getBlockState(currentPos.up(i));
             if (state.getBlock() != ModBlocks.ENDER_TENDRIL_PLANT.get()) {
-                return func_230330_d_().getDefaultState();
+                return getBodyPlantBlock().getDefaultState();
             }
         }
         return getFloweringPlant().getDefaultState();
@@ -88,7 +88,7 @@ public class EnderTendrilTopBlock extends AbstractTopPlantBlock {
         if (facing == this.growthDirection && facingState.isIn(this)) {
             return this.getGrownBlock(worldIn, currentPos);
         } else {
-            if (this.waterloggable) {
+            if (this.breaksInWater) {
                 worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
             }
 
