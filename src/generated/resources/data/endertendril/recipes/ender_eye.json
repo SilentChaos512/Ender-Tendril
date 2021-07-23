@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "endertendril:tendril_pearl"
+    },
+    {
+      "item": "endertendril:tendril_pearl"
+    },
+    {
+      "item": "minecraft:blaze_powder"
+    }
+  ],
+  "result": {
+    "item": "minecraft:ender_eye"
+  }
+}
