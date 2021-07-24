@@ -159,13 +159,11 @@ jar {
 }
 
 task sourcesJar(type: Jar) {
-    appendix = "${project.mc_version}"
     classifier = 'sources'
     from sourceSets.main.allJava
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
-    appendix = "${project.mc_version}"
     classifier = 'javadoc'
     from javadoc.getDestinationDir()
 }
