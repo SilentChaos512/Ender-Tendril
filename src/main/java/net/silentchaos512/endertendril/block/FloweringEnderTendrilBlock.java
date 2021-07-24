@@ -12,20 +12,20 @@ import net.minecraftforge.common.ForgeHooks;
 import java.util.Random;
 
 public class FloweringEnderTendrilBlock extends EnderTendrilBlock {
-    public static final IntegerProperty AGE = BlockStateProperties.AGE_0_15;
+    public static final IntegerProperty AGE = BlockStateProperties.AGE_15;
 
     public FloweringEnderTendrilBlock(Properties builder) {
         super(builder);
-        setDefaultState(getDefaultState().with(AGE, 0));
+        registerDefaultState(defaultBlockState().setValue(AGE, 0));
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(AGE);
     }
 
     public int getAge(BlockState state) {
-        return state.get(AGE);
+        return state.getValue(AGE);
     }
 
     public int getMaxAge() {
@@ -37,11 +37,11 @@ public class FloweringEnderTendrilBlock extends EnderTendrilBlock {
     }
 
     public BlockState withAge(int age) {
-        return this.getDefaultState().with(AGE, age);
+        return this.defaultBlockState().setValue(AGE, age);
     }
 
     @Override
-    public boolean ticksRandomly(BlockState state) {
+    public boolean isRandomlyTicking(BlockState state) {
         return !isMaxAge(state);
     }
 
@@ -54,7 +54,7 @@ public class FloweringEnderTendrilBlock extends EnderTendrilBlock {
         if (i < this.getMaxAge()) {
             float f = 1f;
             if (ForgeHooks.onCropsGrowPre(worldIn, pos, state, random.nextInt((int) (25.0F / f) + 1) == 0)) {
-                worldIn.setBlockState(pos, this.withAge(i + 1), 2);
+                worldIn.setBlock(pos, this.withAge(i + 1), 2);
                 ForgeHooks.onCropsGrowPost(worldIn, pos, state);
             }
         }

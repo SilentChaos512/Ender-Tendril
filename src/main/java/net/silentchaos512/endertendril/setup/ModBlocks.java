@@ -18,24 +18,24 @@ import java.util.function.Supplier;
 
 public final class ModBlocks {
     public static final RegistryObject<EnderTendrilTopBlock> ENDER_TENDRIL = register("ender_tendril", () ->
-            new EnderTendrilTopBlock(AbstractBlock.Properties.create(Material.PLANTS)
-                    .tickRandomly()
-                    .doesNotBlockMovement()
-                    .zeroHardnessAndResistance()
-                    .sound(SoundType.NETHER_VINE)
+            new EnderTendrilTopBlock(AbstractBlock.Properties.of(Material.PLANT)
+                    .randomTicks()
+                    .noCollission()
+                    .instabreak()
+                    .sound(SoundType.WEEPING_VINES)
             ));
     public static final RegistryObject<EnderTendrilBlock> ENDER_TENDRIL_PLANT = register("ender_tendril_plant", () ->
-            new EnderTendrilBlock(AbstractBlock.Properties.create(Material.PLANTS)
-                    .doesNotBlockMovement()
-                    .zeroHardnessAndResistance()
-                    .sound(SoundType.NETHER_VINE)
+            new EnderTendrilBlock(AbstractBlock.Properties.of(Material.PLANT)
+                    .noCollission()
+                    .instabreak()
+                    .sound(SoundType.WEEPING_VINES)
             ));
     public static final RegistryObject<FloweringEnderTendrilBlock> FLOWERING_ENDER_TENDRIL = register("flowering_ender_tendril", () ->
-            new FloweringEnderTendrilBlock(AbstractBlock.Properties.create(Material.PLANTS)
-                    .tickRandomly()
-                    .doesNotBlockMovement()
-                    .zeroHardnessAndResistance()
-                    .sound(SoundType.NETHER_VINE)
+            new FloweringEnderTendrilBlock(AbstractBlock.Properties.of(Material.PLANT)
+                    .randomTicks()
+                    .noCollission()
+                    .instabreak()
+                    .sound(SoundType.WEEPING_VINES)
             ));
 
     private ModBlocks() {}
@@ -44,9 +44,9 @@ public final class ModBlocks {
 
     @OnlyIn(Dist.CLIENT)
     public static void registerRenderTypes(FMLClientSetupEvent event) {
-        RenderTypeLookup.setRenderLayer(ENDER_TENDRIL.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(ENDER_TENDRIL_PLANT.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(FLOWERING_ENDER_TENDRIL.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(ENDER_TENDRIL.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ENDER_TENDRIL_PLANT.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(FLOWERING_ENDER_TENDRIL.get(), RenderType.cutout());
     }
 
     private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> blockSupplier) {

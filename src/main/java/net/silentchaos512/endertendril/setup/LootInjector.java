@@ -19,12 +19,12 @@ public final class LootInjector {
     public static final class Tables {
         private static final Map<ResourceLocation, ResourceLocation> MAP = new HashMap<>();
 
-        public static final ResourceLocation CHESTS_ABANDONED_MINESHAFT = inject(LootTables.CHESTS_ABANDONED_MINESHAFT);
-        public static final ResourceLocation CHESTS_BURIED_TREASURE = inject(LootTables.CHESTS_BURIED_TREASURE);
-        public static final ResourceLocation CHESTS_END_CITY_TREASURE = inject(LootTables.CHESTS_END_CITY_TREASURE);
-        public static final ResourceLocation CHESTS_SHIPWRECK_TREASURE = inject(LootTables.CHESTS_SHIPWRECK_TREASURE);
-        public static final ResourceLocation CHESTS_STRONGHOLD_CORRIDOR = inject(LootTables.CHESTS_STRONGHOLD_CORRIDOR);
-        public static final ResourceLocation CHESTS_STRONGHOLD_CROSSING = inject(LootTables.CHESTS_STRONGHOLD_CROSSING);
+        public static final ResourceLocation CHESTS_ABANDONED_MINESHAFT = inject(LootTables.ABANDONED_MINESHAFT);
+        public static final ResourceLocation CHESTS_BURIED_TREASURE = inject(LootTables.BURIED_TREASURE);
+        public static final ResourceLocation CHESTS_END_CITY_TREASURE = inject(LootTables.END_CITY_TREASURE);
+        public static final ResourceLocation CHESTS_SHIPWRECK_TREASURE = inject(LootTables.SHIPWRECK_TREASURE);
+        public static final ResourceLocation CHESTS_STRONGHOLD_CORRIDOR = inject(LootTables.STRONGHOLD_CORRIDOR);
+        public static final ResourceLocation CHESTS_STRONGHOLD_CROSSING = inject(LootTables.STRONGHOLD_CROSSING);
 
         private Tables() {}
 
@@ -50,9 +50,9 @@ public final class LootInjector {
         Tables.get(event.getName()).ifPresent(injectorName -> {
             EnderTendrilMod.LOGGER.info("Injecting loot table '{}' into '{}'", injectorName, event.getName());
             event.getTable().addPool(
-                    LootPool.builder()
+                    LootPool.lootPool()
                             .name("endertendril_injected")
-                            .addEntry(TableLootEntry.builder(injectorName))
+                            .add(TableLootEntry.lootTableReference(injectorName))
                             .build()
             );
         });

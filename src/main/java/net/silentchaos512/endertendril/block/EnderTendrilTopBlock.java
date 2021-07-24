@@ -20,7 +20,7 @@ import net.silentchaos512.endertendril.setup.ModTags;
 import java.util.Random;
 
 public class EnderTendrilTopBlock extends AbstractTopPlantBlock {
-    private static final VoxelShape SHAPE = Block.makeCuboidShape(4.0D, 9.0D, 4.0D, 12.0D, 16.0D, 12.0D);
+    private static final VoxelShape SHAPE = Block.box(4.0D, 9.0D, 4.0D, 12.0D, 16.0D, 12.0D);
     private static final double GROWTH_CHANCE = 0.05;
 
     public EnderTendrilTopBlock(Properties properties) {
@@ -28,22 +28,22 @@ public class EnderTendrilTopBlock extends AbstractTopPlantBlock {
     }
 
     @Override
-    public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) {
+    public boolean isBonemealSuccess(World worldIn, Random rand, BlockPos pos, BlockState state) {
         return false;
     }
 
     @Override
-    protected int getGrowthAmount(Random rand) {
+    protected int getBlocksToGrowWhenBonemealed(Random rand) {
         return 0;
     }
 
     @Override
-    protected boolean canGrowIn(BlockState state) {
-        return PlantBlockHelper.isAir(state);
+    protected boolean canGrowInto(BlockState state) {
+        return PlantBlockHelper.isValidGrowthState(state);
     }
 
     @Override
-    public boolean ticksRandomly(BlockState state) {
+    public boolean isRandomlyTicking(BlockState state) {
         // Never stop growing as long as space is available
         return true;
     }
@@ -51,17 +51,17 @@ public class EnderTendrilTopBlock extends AbstractTopPlantBlock {
     @Override
     public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
         // Removes the age check from super
-        if (ForgeHooks.onCropsGrowPre(worldIn, pos.offset(this.growthDirection), worldIn.getBlockState(pos.offset(this.growthDirection)),random.nextDouble() < GROWTH_CHANCE)) {
-            BlockPos blockpos = pos.offset(this.growthDirection);
-            if (this.canGrowIn(worldIn.getBlockState(blockpos))) {
-                worldIn.setBlockState(blockpos, state.func_235896_a_(AGE));
+        if (ForgeHooks.onCropsGrowPre(worldIn, pos.relative(this.growthDirection), worldIn.getBlockState(pos.relative(this.growthDirection)),random.nextDouble() < GROWTH_CHANCE)) {
+            BlockPos blockpos = pos.relative(this.growthDirection);
+            if (this.canGrowInto(worldIn.getBlockState(blockpos))) {
+                worldIn.setBlockAndUpdate(blockpos, state.cycle(AGE));
                 ForgeHooks.onCropsGrowPost(worldIn, blockpos, worldIn.getBlockState(blockpos));
             }
         }
     }
 
     @Override
-    protected Block getBodyPlantBlock() {
+    protected Block getBodyBlock() {
         return ModBlocks.ENDER_TENDRIL_PLANT.get();
     }
 
@@ -71,25 +71,25 @@ public class EnderTendrilTopBlock extends AbstractTopPlantBlock {
 
     private BlockState getGrownBlock(IBlockReader worldIn, BlockPos currentPos) {
         for (int i = 1; i < 4; ++i) {
-            BlockState state = worldIn.getBlockState(currentPos.up(i));
+            BlockState state = worldIn.getBlockState(currentPos.above(i));
             if (state.getBlock() != ModBlocks.ENDER_TENDRIL_PLANT.get()) {
-                return getBodyPlantBlock().getDefaultState();
+                return getBodyBlock().defaultBlockState();
             }
         }
-        return getFloweringPlant().getDefaultState();
+        return getFloweringPlant().defaultBlockState();
     }
 
     @Override
-    public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-        if (facing == this.growthDirection.getOpposite() && !stateIn.isValidPosition(worldIn, currentPos)) {
-            worldIn.getPendingBlockTicks().scheduleTick(currentPos, this, 1);
+    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+        if (facing == this.growthDirection.getOpposite() && !stateIn.canSurvive(worldIn, currentPos)) {
+            worldIn.getBlockTicks().scheduleTick(currentPos, this, 1);
         }
 
-        if (facing == this.growthDirection && facingState.isIn(this)) {
+        if (facing == this.growthDirection && facingState.is(this)) {
             return this.getGrownBlock(worldIn, currentPos);
         } else {
-            if (this.breaksInWater) {
-                worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+            if (this.scheduleFluidTicks) {
+                worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
             }
 
             return stateIn;
@@ -97,25 +97,25 @@ public class EnderTendrilTopBlock extends AbstractTopPlantBlock {
     }
 
     @Override
-    public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-        BlockPos blockpos = pos.offset(this.growthDirection.getOpposite());
+    public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos) {
+        BlockPos blockpos = pos.relative(this.growthDirection.getOpposite());
         BlockState blockstate = worldIn.getBlockState(blockpos);
         Block block = blockstate.getBlock();
 
-        return block.isIn(ModTags.Blocks.ENDER_TENDRILS) || blockstate.isSolidSide(worldIn, blockpos, this.growthDirection);
+        return block.is(ModTags.Blocks.ENDER_TENDRILS) || blockstate.isFaceSturdy(worldIn, blockpos, this.growthDirection);
     }
 
     @Override
-    public void onPlayerDestroy(IWorld worldIn, BlockPos pos, BlockState state) {
-        BlockPos pos1 = pos.up();
+    public void destroy(IWorld worldIn, BlockPos pos, BlockState state) {
+        BlockPos pos1 = pos.above();
         BlockState state1 = worldIn.getBlockState(pos1);
 
-        while (state1.isIn(ModTags.Blocks.ENDER_TENDRILS)) {
-            pos1 = pos1.up();
+        while (state1.is(ModTags.Blocks.ENDER_TENDRILS)) {
+            pos1 = pos1.above();
             state1 = worldIn.getBlockState(pos1);
         }
 
         // Destroy the topmost block to take down the whole tendril
-        worldIn.destroyBlock(pos1.down(), false);
+        worldIn.destroyBlock(pos1.below(), false);
     }
 }

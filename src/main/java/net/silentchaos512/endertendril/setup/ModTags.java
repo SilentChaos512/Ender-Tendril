@@ -7,6 +7,6 @@ import net.silentchaos512.endertendril.EnderTendrilMod;
 
 public class ModTags {
     public static class Blocks {
-        public static final ITag.INamedTag<Block> ENDER_TENDRILS = BlockTags.makeWrapperTag(EnderTendrilMod.getId("ender_tendrils").toString());
+        public static final ITag.INamedTag<Block> ENDER_TENDRILS = BlockTags.bind(EnderTendrilMod.getId("ender_tendrils").toString());
     }
 }

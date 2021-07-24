@@ -37,7 +37,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
 
     private static int getFlowerStage(BlockState state) {
-        int age = state.get(FloweringEnderTendrilBlock.AGE);
+        int age = state.getValue(FloweringEnderTendrilBlock.AGE);
         if (age == 15) return 4;
         if (age > 12) return 3;
         if (age > 8) return 2;

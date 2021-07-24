@@ -16,19 +16,19 @@ import net.silentchaos512.endertendril.setup.ModTags;
 import java.util.Random;
 
 public class EnderTendrilBlock extends AbstractBodyPlantBlock {
-    public static final VoxelShape SHAPE = Block.makeCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D);
+    public static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D);
 
     public EnderTendrilBlock(Properties builder) {
         super(builder, Direction.DOWN, SHAPE, false);
     }
 
     @Override
-    public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) {
+    public boolean isBonemealSuccess(World worldIn, Random rand, BlockPos pos, BlockState state) {
         return false;
     }
 
     @Override
-    protected AbstractTopPlantBlock getTopPlantBlock() {
+    protected AbstractTopPlantBlock getHeadBlock() {
         return ModBlocks.ENDER_TENDRIL.get();
     }
 
@@ -41,34 +41,34 @@ public class EnderTendrilBlock extends AbstractBodyPlantBlock {
     }
 
     @Override
-    public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-        if (facing == this.growthDirection.getOpposite() && !stateIn.isValidPosition(worldIn, currentPos)) {
-            worldIn.getPendingBlockTicks().scheduleTick(currentPos, this, 1);
+    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+        if (facing == this.growthDirection.getOpposite() && !stateIn.canSurvive(worldIn, currentPos)) {
+            worldIn.getBlockTicks().scheduleTick(currentPos, this, 1);
         }
         return stateIn;
     }
 
     @Override
-    public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-        BlockPos posUp = pos.up();
+    public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos) {
+        BlockPos posUp = pos.above();
         BlockState stateUp = worldIn.getBlockState(posUp);
-        BlockPos posDown = pos.down();
+        BlockPos posDown = pos.below();
         BlockState stateDown = worldIn.getBlockState(posDown);
 
-        return (stateUp.isIn(ModTags.Blocks.ENDER_TENDRILS) || stateUp.isSolidSide(worldIn, posUp, this.growthDirection))
-                && stateDown.getBlock().isIn(ModTags.Blocks.ENDER_TENDRILS);
+        return (stateUp.is(ModTags.Blocks.ENDER_TENDRILS) || stateUp.isFaceSturdy(worldIn, posUp, this.growthDirection))
+                && stateDown.getBlock().is(ModTags.Blocks.ENDER_TENDRILS);
     }
 
     @Override
-    public void onPlayerDestroy(IWorld worldIn, BlockPos pos, BlockState state) {
-        BlockPos pos1 = pos.up();
+    public void destroy(IWorld worldIn, BlockPos pos, BlockState state) {
+        BlockPos pos1 = pos.above();
         BlockState state1 = worldIn.getBlockState(pos1);
 
-        while (state1.isIn(ModTags.Blocks.ENDER_TENDRILS)) {
-            pos1 = pos1.up();
+        while (state1.is(ModTags.Blocks.ENDER_TENDRILS)) {
+            pos1 = pos1.above();
             state1 = worldIn.getBlockState(pos1);
         }
 
-        worldIn.destroyBlock(pos1.down(), false);
+        worldIn.destroyBlock(pos1.below(), false);
     }
 }

@@ -16,11 +16,11 @@ public class ModRecipesProvider extends RecipeProvider {
     }
 
     @Override
-    protected void registerRecipes(Consumer<IFinishedRecipe> consumer) {
-        ShapelessRecipeBuilder.shapelessRecipe(Items.ENDER_EYE)
-                .addIngredient(ModItems.TENDRIL_PEARL.get(), 2)
-                .addIngredient(Items.BLAZE_POWDER)
-                .addCriterion("has_item", hasItem(ModItems.TENDRIL_PEARL.get()))
-                .build(consumer, EnderTendrilMod.getId("ender_eye"));
+    protected void buildShapelessRecipes(Consumer<IFinishedRecipe> consumer) {
+        ShapelessRecipeBuilder.shapeless(Items.ENDER_EYE)
+                .requires(ModItems.TENDRIL_PEARL.get(), 2)
+                .requires(Items.BLAZE_POWDER)
+                .unlockedBy("has_item", has(ModItems.TENDRIL_PEARL.get()))
+                .save(consumer, EnderTendrilMod.getId("ender_eye"));
     }
 }

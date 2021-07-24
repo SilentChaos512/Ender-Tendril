@@ -13,8 +13,8 @@ public class ModItemTagsProvider extends ForgeItemTagsProvider {
     }
 
     @Override
-    public void registerTags() {
-        getOrCreateBuilder(Tags.Items.ENDER_PEARLS)
+    public void addTags() {
+        tag(Tags.Items.ENDER_PEARLS)
                 .add(ModItems.TENDRIL_PEARL.get());
     }
 }

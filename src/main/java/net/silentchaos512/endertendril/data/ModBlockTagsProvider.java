@@ -13,13 +13,13 @@ public class ModBlockTagsProvider extends ForgeBlockTagsProvider {
     }
 
     @Override
-    public void registerTags() {
-        getOrCreateBuilder(ModTags.Blocks.ENDER_TENDRILS)
+    public void addTags() {
+        tag(ModTags.Blocks.ENDER_TENDRILS)
                 .add(ModBlocks.ENDER_TENDRIL.get())
                 .add(ModBlocks.ENDER_TENDRIL_PLANT.get())
                 .add(ModBlocks.FLOWERING_ENDER_TENDRIL.get());
 
-        getOrCreateBuilder(BlockTags.CLIMBABLE)
+        tag(BlockTags.CLIMBABLE)
             .addTag(ModTags.Blocks.ENDER_TENDRILS);
     }
 }

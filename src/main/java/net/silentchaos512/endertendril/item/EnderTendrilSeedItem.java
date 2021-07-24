@@ -14,8 +14,8 @@ public class EnderTendrilSeedItem extends BlockNamedItem {
 
     @Override
     protected boolean canPlace(BlockItemUseContext context, BlockState state) {
-        BlockPos posUp = context.getPos().up();
-        BlockState stateUp = context.getWorld().getBlockState(posUp);
-        return stateUp.isSolidSide(context.getWorld(), posUp, Direction.DOWN) && super.canPlace(context, state);
+        BlockPos posUp = context.getClickedPos().above();
+        BlockState stateUp = context.getLevel().getBlockState(posUp);
+        return stateUp.isFaceSturdy(context.getLevel(), posUp, Direction.DOWN) && super.canPlace(context, state);
     }
 }

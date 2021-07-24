@@ -41,31 +41,31 @@ public class ModLootTables extends LootTableProvider {
 
     @Override
     protected void validate(Map<ResourceLocation, LootTable> map, ValidationTracker validationtracker) {
-        map.forEach((name, lootTable) -> LootTableManager.validateLootTable(validationtracker, name, lootTable));
+        map.forEach((name, lootTable) -> LootTableManager.validate(validationtracker, name, lootTable));
     }
 
     private static final class Blocks extends BlockLootTables {
         @Override
         protected void addTables() {
-            registerDropping(ModBlocks.ENDER_TENDRIL.get(), ModItems.ENDER_TENDRIL_SEED.get());
-            registerLootTable(ModBlocks.ENDER_TENDRIL_PLANT.get(), LootTable.builder());
+            dropOther(ModBlocks.ENDER_TENDRIL.get(), ModItems.ENDER_TENDRIL_SEED.get());
+            add(ModBlocks.ENDER_TENDRIL_PLANT.get(), LootTable.lootTable());
 
-            BlockStateProperty.Builder floweringTendrilMature = BlockStateProperty.builder(ModBlocks.FLOWERING_ENDER_TENDRIL.get())
-                    .fromProperties(StatePropertiesPredicate.Builder.newBuilder()
-                            .withIntProp(FloweringEnderTendrilBlock.AGE, ModBlocks.FLOWERING_ENDER_TENDRIL.get().getMaxAge())
+            BlockStateProperty.Builder floweringTendrilMature = BlockStateProperty.hasBlockStateProperties(ModBlocks.FLOWERING_ENDER_TENDRIL.get())
+                    .setProperties(StatePropertiesPredicate.Builder.properties()
+                            .hasProperty(FloweringEnderTendrilBlock.AGE, ModBlocks.FLOWERING_ENDER_TENDRIL.get().getMaxAge())
                     );
-            registerLootTable(ModBlocks.FLOWERING_ENDER_TENDRIL.get(), LootTable.builder()
-                    .addLootPool(LootPool.builder()
-                            .rolls(ConstantRange.of(1))
-                            .acceptCondition(floweringTendrilMature)
-                            .addEntry(ItemLootEntry.builder(ModItems.TENDRIL_PEARL.get()))
+            add(ModBlocks.FLOWERING_ENDER_TENDRIL.get(), LootTable.lootTable()
+                    .withPool(LootPool.lootPool()
+                            .setRolls(ConstantRange.exactly(1))
+                            .when(floweringTendrilMature)
+                            .add(ItemLootEntry.lootTableItem(ModItems.TENDRIL_PEARL.get()))
                     )
-                    .addLootPool(LootPool.builder()
-                            .rolls(ConstantRange.of(1))
-                            .acceptCondition(floweringTendrilMature)
-                            .addEntry(ItemLootEntry.builder(ModItems.ENDER_TENDRIL_SEED.get())
-                                    .weight(1)
-                                    .acceptCondition(RandomChance.builder(0.1f))
+                    .withPool(LootPool.lootPool()
+                            .setRolls(ConstantRange.exactly(1))
+                            .when(floweringTendrilMature)
+                            .add(ItemLootEntry.lootTableItem(ModItems.ENDER_TENDRIL_SEED.get())
+                                    .setWeight(1)
+                                    .when(RandomChance.randomChance(0.1f))
                             )
                     )
             );
@@ -91,15 +91,15 @@ public class ModLootTables extends LootTableProvider {
         }
 
         private static LootTable.Builder addSeeds(int emptyWeight) {
-            return LootTable.builder()
-                    .addLootPool(LootPool.builder()
-                            .rolls(ConstantRange.of(1))
+            return LootTable.lootTable()
+                    .withPool(LootPool.lootPool()
+                            .setRolls(ConstantRange.exactly(1))
                             .bonusRolls(0, 1)
-                            .addEntry(EmptyLootEntry.func_216167_a()
-                                    .weight(emptyWeight)
+                            .add(EmptyLootEntry.emptyItem()
+                                    .setWeight(emptyWeight)
                             )
-                            .addEntry(ItemLootEntry.builder(ModItems.ENDER_TENDRIL_SEED.get())
-                                    .weight(1)
+                            .add(ItemLootEntry.lootTableItem(ModItems.ENDER_TENDRIL_SEED.get())
+                                    .setWeight(1)
                             )
                     );
         }
