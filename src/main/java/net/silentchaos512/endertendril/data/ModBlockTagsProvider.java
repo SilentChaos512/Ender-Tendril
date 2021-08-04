@@ -1,15 +1,16 @@
 package net.silentchaos512.endertendril.data;
 
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.tags.BlockTags;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.common.data.ForgeBlockTagsProvider;
+import net.silentchaos512.endertendril.EnderTendrilMod;
 import net.silentchaos512.endertendril.setup.ModBlocks;
 import net.silentchaos512.endertendril.setup.ModTags;
 
-public class ModBlockTagsProvider extends ForgeBlockTagsProvider {
+public class ModBlockTagsProvider extends BlockTagsProvider {
     public ModBlockTagsProvider(DataGenerator gen, ExistingFileHelper existingFileHelper) {
-        super(gen, existingFileHelper);
+        super(gen, EnderTendrilMod.MOD_ID, existingFileHelper);
     }
 
     @Override

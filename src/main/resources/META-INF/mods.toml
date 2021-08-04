@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[34,)"
+loaderVersion="[37,)"
 license="MIT"
 issueTrackerURL="https://github.com/SilentChaos512/Ender-Tendril/issues"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/ender-tendril"
@@ -19,18 +19,18 @@ authors="SilentChaos512"
 [[dependencies.endertendril]]
     modId="forge"
     mandatory=true
-    versionRange="[34,)"
+    versionRange="[37,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.endertendril]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.3,1.17)"
+    versionRange="[1.17.1,1.18)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.endertendril]]
     modId="silentlib"
     mandatory=false
-    versionRange="[4.9,)"
+    versionRange="[5.0,6.0)"
     ordering="NONE"
     side="BOTH"

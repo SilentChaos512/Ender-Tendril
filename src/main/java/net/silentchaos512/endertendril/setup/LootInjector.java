@@ -1,9 +1,9 @@
 package net.silentchaos512.endertendril.setup;
 
-import net.minecraft.loot.LootPool;
-import net.minecraft.loot.LootTables;
-import net.minecraft.loot.TableLootEntry;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
+import net.minecraft.world.level.storage.loot.entries.LootTableReference;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -19,12 +19,12 @@ public final class LootInjector {
     public static final class Tables {
         private static final Map<ResourceLocation, ResourceLocation> MAP = new HashMap<>();
 
-        public static final ResourceLocation CHESTS_ABANDONED_MINESHAFT = inject(LootTables.ABANDONED_MINESHAFT);
-        public static final ResourceLocation CHESTS_BURIED_TREASURE = inject(LootTables.BURIED_TREASURE);
-        public static final ResourceLocation CHESTS_END_CITY_TREASURE = inject(LootTables.END_CITY_TREASURE);
-        public static final ResourceLocation CHESTS_SHIPWRECK_TREASURE = inject(LootTables.SHIPWRECK_TREASURE);
-        public static final ResourceLocation CHESTS_STRONGHOLD_CORRIDOR = inject(LootTables.STRONGHOLD_CORRIDOR);
-        public static final ResourceLocation CHESTS_STRONGHOLD_CROSSING = inject(LootTables.STRONGHOLD_CROSSING);
+        public static final ResourceLocation CHESTS_ABANDONED_MINESHAFT = inject(BuiltInLootTables.ABANDONED_MINESHAFT);
+        public static final ResourceLocation CHESTS_BURIED_TREASURE = inject(BuiltInLootTables.BURIED_TREASURE);
+        public static final ResourceLocation CHESTS_END_CITY_TREASURE = inject(BuiltInLootTables.END_CITY_TREASURE);
+        public static final ResourceLocation CHESTS_SHIPWRECK_TREASURE = inject(BuiltInLootTables.SHIPWRECK_TREASURE);
+        public static final ResourceLocation CHESTS_STRONGHOLD_CORRIDOR = inject(BuiltInLootTables.STRONGHOLD_CORRIDOR);
+        public static final ResourceLocation CHESTS_STRONGHOLD_CROSSING = inject(BuiltInLootTables.STRONGHOLD_CROSSING);
 
         private Tables() {}
 
@@ -52,7 +52,7 @@ public final class LootInjector {
             event.getTable().addPool(
                     LootPool.lootPool()
                             .name("endertendril_injected")
-                            .add(TableLootEntry.lootTableReference(injectorName))
+                            .add(LootTableReference.lootTableReference(injectorName))
                             .build()
             );
         });
