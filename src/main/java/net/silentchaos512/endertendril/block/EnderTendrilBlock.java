@@ -43,7 +43,7 @@ public class EnderTendrilBlock extends GrowingPlantBodyBlock {
     @Override
     public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
         if (facing == this.growthDirection.getOpposite() && !stateIn.canSurvive(worldIn, currentPos)) {
-            worldIn.getBlockTicks().scheduleTick(currentPos, this, 1);
+            worldIn.scheduleTick(currentPos, this, 1);
         }
         return stateIn;
     }

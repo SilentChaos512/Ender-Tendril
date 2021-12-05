@@ -2,7 +2,7 @@ package net.silentchaos512.endertendril.setup;
 
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.fmllegacy.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 import net.silentchaos512.endertendril.item.EnderTendrilSeedItem;
 
 import java.util.function.Supplier;

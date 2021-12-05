@@ -82,14 +82,14 @@ public class EnderTendrilTopBlock extends GrowingPlantHeadBlock {
     @Override
     public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
         if (facing == this.growthDirection.getOpposite() && !stateIn.canSurvive(worldIn, currentPos)) {
-            worldIn.getBlockTicks().scheduleTick(currentPos, this, 1);
+            worldIn.scheduleTick(currentPos, this, 1);
         }
 
         if (facing == this.growthDirection && facingState.is(this)) {
             return this.getGrownBlock(worldIn, currentPos);
         } else {
             if (this.scheduleFluidTicks) {
-                worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
+                worldIn.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
             }
 
             return stateIn;

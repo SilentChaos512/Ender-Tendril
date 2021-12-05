@@ -20,7 +20,8 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import net.minecraftforge.fmllegacy.RegistryObject;
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import net.minecraftforge.registries.RegistryObject;
 import net.silentchaos512.endertendril.block.FloweringEnderTendrilBlock;
 import net.silentchaos512.endertendril.setup.LootInjector;
 import net.silentchaos512.endertendril.setup.ModBlocks;
@@ -102,7 +103,7 @@ public class ModLootTables extends LootTableProvider {
             return LootTable.lootTable()
                     .withPool(LootPool.lootPool()
                             .setRolls(ConstantValue.exactly(1))
-                            .bonusRolls(0, 1)
+                            .setBonusRolls(UniformGenerator.between(0, 1))
                             .add(EmptyLootItem.emptyItem()
                                     .setWeight(emptyWeight)
                             )

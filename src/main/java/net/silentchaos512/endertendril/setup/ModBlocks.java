@@ -9,7 +9,7 @@ import net.minecraft.world.level.material.Material;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fmllegacy.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 import net.silentchaos512.endertendril.block.EnderTendrilBlock;
 import net.silentchaos512.endertendril.block.EnderTendrilTopBlock;
 import net.silentchaos512.endertendril.block.FloweringEnderTendrilBlock;
