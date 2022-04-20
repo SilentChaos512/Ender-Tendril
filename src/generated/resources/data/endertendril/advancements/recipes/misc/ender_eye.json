@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "endertendril:tendril_pearl"
+            "items": [
+              "endertendril:tendril_pearl"
+            ]
           }
         ]
       }
