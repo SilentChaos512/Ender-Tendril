@@ -2,6 +2,7 @@ package net.silentchaos512.endertendril.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
@@ -13,8 +14,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.silentchaos512.endertendril.setup.ModBlocks;
 import net.silentchaos512.endertendril.setup.ModTags;
 
-import java.util.Random;
-
 public class EnderTendrilBlock extends GrowingPlantBodyBlock {
     public static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D);
 
@@ -23,7 +22,7 @@ public class EnderTendrilBlock extends GrowingPlantBodyBlock {
     }
 
     @Override
-    public boolean isBonemealSuccess(Level worldIn, Random rand, BlockPos pos, BlockState state) {
+    public boolean isBonemealSuccess(Level worldIn, RandomSource rand, BlockPos pos, BlockState state) {
         return false;
     }
 

@@ -6,30 +6,6 @@
     "age=1": {
       "model": "endertendril:block/ender_tendril"
     },
-    "age=2": {
-      "model": "endertendril:block/ender_tendril"
-    },
-    "age=3": {
-      "model": "endertendril:block/ender_tendril"
-    },
-    "age=4": {
-      "model": "endertendril:block/ender_tendril"
-    },
-    "age=5": {
-      "model": "endertendril:block/ender_tendril"
-    },
-    "age=6": {
-      "model": "endertendril:block/ender_tendril"
-    },
-    "age=7": {
-      "model": "endertendril:block/ender_tendril"
-    },
-    "age=8": {
-      "model": "endertendril:block/ender_tendril"
-    },
-    "age=9": {
-      "model": "endertendril:block/ender_tendril"
-    },
     "age=10": {
       "model": "endertendril:block/ender_tendril"
     },
@@ -60,6 +36,9 @@
     "age=19": {
       "model": "endertendril:block/ender_tendril"
     },
+    "age=2": {
+      "model": "endertendril:block/ender_tendril"
+    },
     "age=20": {
       "model": "endertendril:block/ender_tendril"
     },
@@ -76,6 +55,27 @@
       "model": "endertendril:block/ender_tendril"
     },
     "age=25": {
+      "model": "endertendril:block/ender_tendril"
+    },
+    "age=3": {
+      "model": "endertendril:block/ender_tendril"
+    },
+    "age=4": {
+      "model": "endertendril:block/ender_tendril"
+    },
+    "age=5": {
+      "model": "endertendril:block/ender_tendril"
+    },
+    "age=6": {
+      "model": "endertendril:block/ender_tendril"
+    },
+    "age=7": {
+      "model": "endertendril:block/ender_tendril"
+    },
+    "age=8": {
+      "model": "endertendril:block/ender_tendril"
+    },
+    "age=9": {
       "model": "endertendril:block/ender_tendril"
     }
   }

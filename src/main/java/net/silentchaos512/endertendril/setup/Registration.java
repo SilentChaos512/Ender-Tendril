@@ -1,13 +1,12 @@
 package net.silentchaos512.endertendril.setup;
 
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
-import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.silentchaos512.endertendril.EnderTendrilMod;
 
 public final class Registration {
@@ -25,7 +24,7 @@ public final class Registration {
         ModItems.register();
     }
 
-    private static <T extends IForgeRegistryEntry<T>> DeferredRegister<T> create(IForgeRegistry<T> registry) {
+    private static <T> DeferredRegister<T> create(IForgeRegistry<T> registry) {
         return DeferredRegister.create(registry, EnderTendrilMod.MOD_ID);
     }
 }

@@ -2,14 +2,13 @@ package net.silentchaos512.endertendril.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraftforge.common.ForgeHooks;
-
-import java.util.Random;
 
 public class FloweringEnderTendrilBlock extends EnderTendrilBlock {
     public static final IntegerProperty AGE = BlockStateProperties.AGE_15;
@@ -47,7 +46,7 @@ public class FloweringEnderTendrilBlock extends EnderTendrilBlock {
 
     @SuppressWarnings("deprecation")
     @Override
-    public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, Random random) {
+    public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
         if (!worldIn.isAreaLoaded(pos, 1)) return;
 
         int i = this.getAge(state);

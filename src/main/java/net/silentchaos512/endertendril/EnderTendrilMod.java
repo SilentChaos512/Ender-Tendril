@@ -1,6 +1,7 @@
 package net.silentchaos512.endertendril;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.RandomSource;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
@@ -20,6 +21,7 @@ public final class EnderTendrilMod {
 
     public static final Logger LOGGER = LogManager.getLogger(MOD_NAME);
     public static final Random RANDOM = new Random();
+    public static final RandomSource RANDOM_SOURCE = RandomSource.create();
 
     public EnderTendrilMod() {
         DistExecutor.safeRunForDist(() -> SideProxy.Client::new, () -> SideProxy.Server::new);

@@ -2,48 +2,48 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "rolls": 1.0,
       "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "endertendril:flowering_ender_tendril",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "15"
+          }
+        }
+      ],
       "entries": [
         {
           "type": "minecraft:item",
           "name": "endertendril:tendril_pearl"
         }
       ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
       "conditions": [
         {
-          "condition": "minecraft:block_state_property",
           "block": "endertendril:flowering_ender_tendril",
+          "condition": "minecraft:block_state_property",
           "properties": {
             "age": "15"
           }
         }
-      ]
-    },
-    {
-      "rolls": 1.0,
-      "bonus_rolls": 0.0,
+      ],
       "entries": [
         {
           "type": "minecraft:item",
           "conditions": [
             {
-              "condition": "minecraft:random_chance",
-              "chance": 0.1
+              "chance": 0.1,
+              "condition": "minecraft:random_chance"
             }
           ],
           "name": "endertendril:ender_tendril_seed"
         }
       ],
-      "conditions": [
-        {
-          "condition": "minecraft:block_state_property",
-          "block": "endertendril:flowering_ender_tendril",
-          "properties": {
-            "age": "15"
-          }
-        }
-      ]
+      "rolls": 1.0
     }
   ]
 }

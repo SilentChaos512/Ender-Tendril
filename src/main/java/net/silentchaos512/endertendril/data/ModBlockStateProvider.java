@@ -17,21 +17,28 @@ public class ModBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         getVariantBuilder(ModBlocks.ENDER_TENDRIL.get()).forAllStates(state -> {
-            // TODO
             return ConfiguredModel.builder()
-                    .modelFile(models().cross("ender_tendril", modLoc("block/ender_tendril")))
+                    .modelFile(models()
+                            .cross("ender_tendril", modLoc("block/ender_tendril"))
+                            .renderType("cutout")
+                    )
                     .build();
         });
         getVariantBuilder(ModBlocks.ENDER_TENDRIL_PLANT.get()).forAllStates(state -> {
-            // TODO
             return ConfiguredModel.builder()
-                    .modelFile(models().cross("ender_tendril_plant", modLoc("block/ender_tendril_plant")))
+                    .modelFile(models()
+                            .cross("ender_tendril_plant", modLoc("block/ender_tendril_plant"))
+                            .renderType("cutout")
+                    )
                     .build();
         });
         getVariantBuilder(ModBlocks.FLOWERING_ENDER_TENDRIL.get()).forAllStates(state -> {
             int stage = getFlowerStage(state);
             return ConfiguredModel.builder()
-                    .modelFile(models().cross("flowering_ender_tendril_" + stage, modLoc("block/flowering_ender_tendril_" + stage)))
+                    .modelFile(models()
+                            .cross("flowering_ender_tendril_" + stage, modLoc("block/flowering_ender_tendril_" + stage))
+                            .renderType("cutout")
+                    )
                     .build();
         });
     }

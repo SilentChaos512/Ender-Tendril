@@ -3,6 +3,7 @@ package net.silentchaos512.endertendril.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -17,8 +18,6 @@ import net.minecraftforge.common.ForgeHooks;
 import net.silentchaos512.endertendril.setup.ModBlocks;
 import net.silentchaos512.endertendril.setup.ModTags;
 
-import java.util.Random;
-
 public class EnderTendrilTopBlock extends GrowingPlantHeadBlock {
     private static final VoxelShape SHAPE = Block.box(4.0D, 9.0D, 4.0D, 12.0D, 16.0D, 12.0D);
     private static final double GROWTH_CHANCE = 0.05;
@@ -28,12 +27,12 @@ public class EnderTendrilTopBlock extends GrowingPlantHeadBlock {
     }
 
     @Override
-    public boolean isBonemealSuccess(Level worldIn, Random rand, BlockPos pos, BlockState state) {
+    public boolean isBonemealSuccess(Level worldIn, RandomSource rand, BlockPos pos, BlockState state) {
         return false;
     }
 
     @Override
-    protected int getBlocksToGrowWhenBonemealed(Random rand) {
+    protected int getBlocksToGrowWhenBonemealed(RandomSource rand) {
         return 0;
     }
 
@@ -49,7 +48,7 @@ public class EnderTendrilTopBlock extends GrowingPlantHeadBlock {
     }
 
     @Override
-    public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, Random random) {
+    public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
         // Removes the age check from super
         if (ForgeHooks.onCropsGrowPre(worldIn, pos.relative(this.growthDirection), worldIn.getBlockState(pos.relative(this.growthDirection)),random.nextDouble() < GROWTH_CHANCE)) {
             BlockPos blockpos = pos.relative(this.growthDirection);

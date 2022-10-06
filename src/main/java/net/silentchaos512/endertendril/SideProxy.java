@@ -1,8 +1,8 @@
 package net.silentchaos512.endertendril;
 
-import net.minecraftforge.fml.event.lifecycle.*;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.silentchaos512.endertendril.setup.ModBlocks;
 
 class SideProxy {
     SideProxy() {
@@ -14,7 +14,6 @@ class SideProxy {
         }
 
         private static void clientSetup(FMLClientSetupEvent event) {
-            ModBlocks.registerRenderTypes(event);
         }
     }
 
