@@ -10,11 +10,12 @@
       "entries": [
         {
           "type": "minecraft:empty",
-          "weight": 3
+          "weight": 2
         },
         {
           "type": "minecraft:item",
-          "name": "endertendril:ender_tendril_seed"
+          "name": "endertendril:ender_tendril_seed",
+          "weight": 3
         }
       ],
       "rolls": 1.0

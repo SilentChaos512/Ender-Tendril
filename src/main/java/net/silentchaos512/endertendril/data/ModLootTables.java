@@ -91,15 +91,15 @@ public class ModLootTables extends LootTableProvider {
     private static final class Chests extends ChestLoot {
         @Override
         public void accept(BiConsumer<ResourceLocation, LootTable.Builder> consumer) {
-            consumer.accept(LootInjector.Tables.CHESTS_ABANDONED_MINESHAFT, addSeeds(7));
-            consumer.accept(LootInjector.Tables.CHESTS_BURIED_TREASURE, addSeeds(4));
-            consumer.accept(LootInjector.Tables.CHESTS_END_CITY_TREASURE, addSeeds(2));
-            consumer.accept(LootInjector.Tables.CHESTS_SHIPWRECK_TREASURE, addSeeds(5));
-            consumer.accept(LootInjector.Tables.CHESTS_STRONGHOLD_CORRIDOR, addSeeds(2));
-            consumer.accept(LootInjector.Tables.CHESTS_STRONGHOLD_CROSSING, addSeeds(3));
+            consumer.accept(LootInjector.Tables.CHESTS_ABANDONED_MINESHAFT, addSeeds(1, 2));
+            consumer.accept(LootInjector.Tables.CHESTS_BURIED_TREASURE, addSeeds(1, 2));
+            consumer.accept(LootInjector.Tables.CHESTS_END_CITY_TREASURE, addSeeds(2, 1));
+            consumer.accept(LootInjector.Tables.CHESTS_SHIPWRECK_TREASURE, addSeeds(1, 2));
+            consumer.accept(LootInjector.Tables.CHESTS_STRONGHOLD_CORRIDOR, addSeeds(2, 1));
+            consumer.accept(LootInjector.Tables.CHESTS_STRONGHOLD_CROSSING, addSeeds(3, 2));
         }
 
-        private static LootTable.Builder addSeeds(int emptyWeight) {
+        private static LootTable.Builder addSeeds(int seedWeight, int emptyWeight) {
             return LootTable.lootTable()
                     .withPool(LootPool.lootPool()
                             .setRolls(ConstantValue.exactly(1))
@@ -108,7 +108,7 @@ public class ModLootTables extends LootTableProvider {
                                     .setWeight(emptyWeight)
                             )
                             .add(LootItem.lootTableItem(ModItems.ENDER_TENDRIL_SEED.get())
-                                    .setWeight(1)
+                                    .setWeight(seedWeight)
                             )
                     );
         }
