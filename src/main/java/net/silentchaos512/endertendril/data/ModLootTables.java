@@ -1,13 +1,14 @@
 package net.silentchaos512.endertendril.data;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.datafixers.util.Pair;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.loot.BlockLoot;
-import net.minecraft.data.loot.ChestLoot;
+import net.minecraft.data.PackOutput;
+import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.data.loot.packs.VanillaChestLoot;
+import net.minecraft.data.loot.packs.VanillaLootTableProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -15,7 +16,6 @@ import net.minecraft.world.level.storage.loot.LootTables;
 import net.minecraft.world.level.storage.loot.ValidationContext;
 import net.minecraft.world.level.storage.loot.entries.EmptyLootItem;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
@@ -28,23 +28,22 @@ import net.silentchaos512.endertendril.setup.ModBlocks;
 import net.silentchaos512.endertendril.setup.ModItems;
 import net.silentchaos512.endertendril.setup.Registration;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class ModLootTables extends LootTableProvider {
-    public ModLootTables(DataGenerator dataGeneratorIn) {
-        super(dataGeneratorIn);
+    public ModLootTables(PackOutput packOutput) {
+        super(packOutput, Collections.emptySet(), VanillaLootTableProvider.create(packOutput).getTables());
     }
 
     @Override
-    protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>> getTables() {
+    public List<SubProviderEntry> getTables() {
         return ImmutableList.of(
-                Pair.of(Blocks::new, LootContextParamSets.BLOCK),
-                Pair.of(Chests::new, LootContextParamSets.CHEST)
+                new SubProviderEntry(Blocks::new, LootContextParamSets.BLOCK),
+                new SubProviderEntry(Chests::new, LootContextParamSets.CHEST)
         );
     }
 
@@ -53,9 +52,13 @@ public class ModLootTables extends LootTableProvider {
         map.forEach((name, lootTable) -> LootTables.validate(validationtracker, name, lootTable));
     }
 
-    private static final class Blocks extends BlockLoot {
+    private static final class Blocks extends BlockLootSubProvider {
+        public Blocks() {
+            super(Collections.emptySet(), FeatureFlags.REGISTRY.allFlags());
+        }
+
         @Override
-        protected void addTables() {
+        protected void generate() {
             dropOther(ModBlocks.ENDER_TENDRIL.get(), ModItems.ENDER_TENDRIL_SEED.get());
             add(ModBlocks.ENDER_TENDRIL_PLANT.get(), LootTable.lootTable());
 
@@ -88,9 +91,9 @@ public class ModLootTables extends LootTableProvider {
         }
     }
 
-    private static final class Chests extends ChestLoot {
+    private static final class Chests extends VanillaChestLoot {
         @Override
-        public void accept(BiConsumer<ResourceLocation, LootTable.Builder> consumer) {
+        public void generate(BiConsumer<ResourceLocation, LootTable.Builder> consumer) {
             consumer.accept(LootInjector.Tables.CHESTS_ABANDONED_MINESHAFT, addSeeds(1, 2));
             consumer.accept(LootInjector.Tables.CHESTS_BURIED_TREASURE, addSeeds(1, 2));
             consumer.accept(LootInjector.Tables.CHESTS_END_CITY_TREASURE, addSeeds(2, 1));

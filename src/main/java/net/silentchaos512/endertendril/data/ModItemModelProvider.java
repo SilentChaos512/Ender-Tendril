@@ -15,7 +15,7 @@ import java.util.function.Supplier;
 
 public class ModItemModelProvider extends ItemModelProvider {
     public ModItemModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-        super(generator, EnderTendrilMod.MOD_ID, existingFileHelper);
+        super(generator.getPackOutput(), EnderTendrilMod.MOD_ID, existingFileHelper);
     }
 
     @Override

@@ -11,7 +11,7 @@ import net.silentchaos512.endertendril.setup.ModBlocks;
 
 public class ModBlockStateProvider extends BlockStateProvider {
     public ModBlockStateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
-        super(gen, EnderTendrilMod.MOD_ID, exFileHelper);
+        super(gen.getPackOutput(), EnderTendrilMod.MOD_ID, exFileHelper);
     }
 
     @Override
