@@ -1,3 +1,4 @@
 {
-  "type": "minecraft:block"
+  "type": "minecraft:block",
+  "random_sequence": "endertendril:blocks/ender_tendril_plant"
 }

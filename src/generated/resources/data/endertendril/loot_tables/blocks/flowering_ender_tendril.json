@@ -45,5 +45,6 @@
       ],
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "endertendril:blocks/flowering_ender_tendril"
 }

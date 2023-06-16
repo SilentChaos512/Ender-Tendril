@@ -19,6 +19,7 @@ public final class Registration {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         BLOCKS.register(modEventBus);
         ITEMS.register(modEventBus);
+        ModLoot.LOOT_MODIFIERS.register(modEventBus);
 
         ModBlocks.register();
         ModItems.register();

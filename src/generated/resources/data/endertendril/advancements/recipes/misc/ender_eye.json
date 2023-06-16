@@ -30,5 +30,6 @@
     "recipes": [
       "endertendril:ender_eye"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

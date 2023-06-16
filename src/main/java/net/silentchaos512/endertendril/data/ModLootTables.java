@@ -10,20 +10,14 @@ import net.minecraft.data.loot.packs.VanillaLootTableProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.storage.loot.LootPool;
-import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.LootTables;
-import net.minecraft.world.level.storage.loot.ValidationContext;
-import net.minecraft.world.level.storage.loot.entries.EmptyLootItem;
+import net.minecraft.world.level.storage.loot.*;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.registries.RegistryObject;
 import net.silentchaos512.endertendril.block.FloweringEnderTendrilBlock;
-import net.silentchaos512.endertendril.setup.LootInjector;
 import net.silentchaos512.endertendril.setup.ModBlocks;
 import net.silentchaos512.endertendril.setup.ModItems;
 import net.silentchaos512.endertendril.setup.Registration;
@@ -48,8 +42,8 @@ public class ModLootTables extends LootTableProvider {
     }
 
     @Override
-    protected void validate(Map<ResourceLocation, LootTable> map, ValidationContext validationtracker) {
-        map.forEach((name, lootTable) -> LootTables.validate(validationtracker, name, lootTable));
+    protected void validate(Map<ResourceLocation, LootTable> map, ValidationContext validationcontext) {
+        map.forEach((name, lootTable) -> lootTable.validate(validationcontext.setParams(lootTable.getParamSet()).enterElement("{" + name + "}", new LootDataId<>(LootDataType.TABLE, name))));
     }
 
     private static final class Blocks extends BlockLootSubProvider {
@@ -94,26 +88,6 @@ public class ModLootTables extends LootTableProvider {
     private static final class Chests extends VanillaChestLoot {
         @Override
         public void generate(BiConsumer<ResourceLocation, LootTable.Builder> consumer) {
-            consumer.accept(LootInjector.Tables.CHESTS_ABANDONED_MINESHAFT, addSeeds(1, 2));
-            consumer.accept(LootInjector.Tables.CHESTS_BURIED_TREASURE, addSeeds(1, 2));
-            consumer.accept(LootInjector.Tables.CHESTS_END_CITY_TREASURE, addSeeds(2, 1));
-            consumer.accept(LootInjector.Tables.CHESTS_SHIPWRECK_TREASURE, addSeeds(1, 2));
-            consumer.accept(LootInjector.Tables.CHESTS_STRONGHOLD_CORRIDOR, addSeeds(2, 1));
-            consumer.accept(LootInjector.Tables.CHESTS_STRONGHOLD_CROSSING, addSeeds(3, 2));
-        }
-
-        private static LootTable.Builder addSeeds(int seedWeight, int emptyWeight) {
-            return LootTable.lootTable()
-                    .withPool(LootPool.lootPool()
-                            .setRolls(ConstantValue.exactly(1))
-                            .setBonusRolls(UniformGenerator.between(0, 1))
-                            .add(EmptyLootItem.emptyItem()
-                                    .setWeight(emptyWeight)
-                            )
-                            .add(LootItem.lootTableItem(ModItems.ENDER_TENDRIL_SEED.get())
-                                    .setWeight(seedWeight)
-                            )
-                    );
         }
     }
 }
