@@ -7,10 +7,8 @@ block as well.
 
 ## Links and Downloads
 
-- [CurseForge](https://www.curseforge.com/minecraft/mc-mods/ender-tendril) (downloads and more information)
+- [CurseForge](https://www.curseforge.com/minecraft/mc-mods/ender-tendril)
+- [Modrinth](https://modrinth.com/mod/ender-tendril)
 - [Discord Server](https://discord.gg/Adyk9zHnUn) (easiest way to get quick questions answered, do not use to report bugs)
 
-### Note on Downloads
-
-**I only upload builds to Minecraft CurseForge.** If you downloaded the mod from somewhere other than CurseForge, I cannot make any guarantees about the file or its contents, as it was uploaded without my permission.
-
+If you downloaded the mod from somewhere other than Curseforge or Modrinth (or as part of a modpack in some cases), I cannot make any guarantees about the file or its contents, as it may have been uploaded without my permission.
