@@ -1,6 +1,5 @@
 package net.silentchaos512.endertendril.data.client;
 
-import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelOutput;
 import net.minecraft.client.data.models.blockstates.BlockModelDefinitionGenerator;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
@@ -9,15 +8,16 @@ import net.minecraft.client.data.models.model.ModelInstance;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.silentchaos512.endertendril.block.FloweringEnderTendrilBlock;
 import net.silentchaos512.endertendril.setup.ModBlocks;
+import net.silentchaos512.lib.data.client.LibBlockModelGenerators;
 
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-public class ModBlockModelGenerator extends BlockModelGenerators {
-    public ModBlockModelGenerator(Consumer<BlockModelDefinitionGenerator> blockStateOutput, ItemModelOutput itemModelOutput, BiConsumer<ResourceLocation, ModelInstance> modelOutput) {
+public class ModBlockModelGenerator extends LibBlockModelGenerators {
+    public ModBlockModelGenerator(Consumer<BlockModelDefinitionGenerator> blockStateOutput, ItemModelOutput itemModelOutput, BiConsumer<Identifier, ModelInstance> modelOutput) {
         super(blockStateOutput, itemModelOutput, modelOutput);
     }
 
@@ -35,11 +35,11 @@ public class ModBlockModelGenerator extends BlockModelGenerators {
                         .with(
                                 PropertyDispatch.initial(FloweringEnderTendrilBlock.AGE)
                                         .generate(age -> {
-                                            ResourceLocation texture = TextureMapping.getBlockTexture(
+                                            Identifier texture = TextureMapping.getBlockTexture(
                                                     block,
                                                     "_" + getFlowerStage(age)
                                             );
-                                            ResourceLocation model = ModelTemplates.CROSS.createWithSuffix(
+                                            Identifier model = ModelTemplates.CROSS.createWithSuffix(
                                                     block,
                                                     "_" + age,
                                                     new TextureMapping().put(TextureSlot.CROSS, texture),

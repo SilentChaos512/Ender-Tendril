@@ -17,7 +17,7 @@ public final class ModItems {
     public static final DeferredItem<EnderTendrilSeedItem> ENDER_TENDRIL_SEED = ITEMS.registerItem(
             "ender_tendril_seed",
             properties -> new EnderTendrilSeedItem(ModBlocks.ENDER_TENDRIL.get(), properties),
-            new Item.Properties().useItemDescriptionPrefix()
+            Item.Properties::useItemDescriptionPrefix
     );
     public static final DeferredItem<Item> TENDRIL_PEARL = ITEMS.registerSimpleItem("tendril_pearl");
 

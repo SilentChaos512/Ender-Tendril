@@ -10,7 +10,7 @@ import net.silentchaos512.endertendril.EnderTendrilMod;
 import net.silentchaos512.endertendril.setup.ModItems;
 
 public class ModItemTagsProvider extends IntrinsicHolderTagsProvider<Item> {
-    public ModItemTagsProvider(GatherDataEvent event, ModBlockTagsProvider blocks) {
+    public ModItemTagsProvider(GatherDataEvent event) {
         //noinspection deprecation
         super(event.getGenerator().getPackOutput(), Registries.ITEM, event.getLookupProvider(), item -> item.builtInRegistryHolder().key(), EnderTendrilMod.MOD_ID);
     }

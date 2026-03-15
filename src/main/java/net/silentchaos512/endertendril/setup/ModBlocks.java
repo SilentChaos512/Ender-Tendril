@@ -1,7 +1,6 @@
 package net.silentchaos512.endertendril.setup;
 
 import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.silentchaos512.endertendril.EnderTendrilMod;
@@ -16,7 +15,7 @@ public final class ModBlocks {
     public static final DeferredBlock<EnderTendrilTopBlock> ENDER_TENDRIL = BLOCKS.registerBlock(
             "ender_tendril",
             EnderTendrilTopBlock::new,
-            BlockBehaviour.Properties.of()
+            properties -> properties
                     .randomTicks()
                     .noCollision()
                     .instabreak()
@@ -25,7 +24,7 @@ public final class ModBlocks {
     public static final DeferredBlock<EnderTendrilBlock> ENDER_TENDRIL_PLANT = BLOCKS.registerBlock(
             "ender_tendril_plant",
             EnderTendrilBlock::new,
-            BlockBehaviour.Properties.of()
+            properties -> properties
                     .noCollision()
                     .instabreak()
                     .sound(SoundType.WEEPING_VINES)
@@ -33,7 +32,7 @@ public final class ModBlocks {
     public static final DeferredBlock<FloweringEnderTendrilBlock> FLOWERING_ENDER_TENDRIL = BLOCKS.registerBlock(
             "flowering_ender_tendril",
             FloweringEnderTendrilBlock::new,
-            BlockBehaviour.Properties.of()
+            properties -> properties
                     .randomTicks()
                     .noCollision()
                     .instabreak()
@@ -42,7 +41,7 @@ public final class ModBlocks {
     public static final DeferredBlock<InvertedEnderTendrilBlock> INVERTED_ENDER_TENDRIL = BLOCKS.registerBlock(
             "inverted_ender_tendril",
             InvertedEnderTendrilBlock::new,
-            BlockBehaviour.Properties.of()
+            properties -> properties
                     .noCollision()
                     .instabreak()
                     .sound(SoundType.WEEPING_VINES)

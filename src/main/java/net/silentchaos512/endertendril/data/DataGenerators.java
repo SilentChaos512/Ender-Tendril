@@ -19,9 +19,8 @@ public final class DataGenerators {
         var packOutput = gen.getPackOutput();
         var lookupProvider = event.getLookupProvider();
 
-        ModBlockTagsProvider blocks = new ModBlockTagsProvider(event);
-        gen.addProvider(true, blocks);
-        gen.addProvider(true, new ModItemTagsProvider(event, blocks));
+        gen.addProvider(true, new ModBlockTagsProvider(event));
+        gen.addProvider(true, new ModItemTagsProvider(event));
 
         gen.addProvider(true, new ModLootTables(packOutput, lookupProvider));
         gen.addProvider(true, LibRecipeProvider.createRunner(packOutput, lookupProvider, "Ender Tendril Recipes", ModRecipesProvider::new));
