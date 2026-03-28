@@ -35,14 +35,14 @@ public class ModBlockModelGenerator extends LibBlockModelGenerators {
                         .with(
                                 PropertyDispatch.initial(FloweringEnderTendrilBlock.AGE)
                                         .generate(age -> {
-                                            Identifier texture = TextureMapping.getBlockTexture(
+                                            var material = TextureMapping.getBlockTexture(
                                                     block,
                                                     "_" + getFlowerStage(age)
                                             );
                                             Identifier model = ModelTemplates.CROSS.createWithSuffix(
                                                     block,
                                                     "_" + age,
-                                                    new TextureMapping().put(TextureSlot.CROSS, texture),
+                                                    new TextureMapping().put(TextureSlot.CROSS, material),
                                                     this.modelOutput
                                             );
                                             return plainVariant(model);

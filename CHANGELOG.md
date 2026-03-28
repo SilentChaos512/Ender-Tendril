@@ -3,6 +3,9 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [26.1-1.8.0] - 2026-03-28
+- Ported to NeoForge 26.1
+
 ## [1.21.11-1.8.0] - 2026-03-15
 - Ported to NeoForge 1.21.11
 
