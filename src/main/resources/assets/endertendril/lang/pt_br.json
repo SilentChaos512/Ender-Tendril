@@ -1,0 +1,9 @@
+{
+  "block.endertendril.ender_tendril": "Tentáculo do Ender",
+  "block.endertendril.ender_tendril_plant": "Tentáculo do Ender",
+  "block.endertendril.flowering_ender_tendril": "Tentáculo do Ender Florida",
+  "block.endertendril.inverted_ender_tendril": "Tentáculo do Ender Invertida",
+  "endertendril.configuration.tendrilGrowthSpeedMultiplier": "Multiplicador de Velocidade de Crescimento do Tentáculo",
+  "item.endertendril.ender_tendril_seed": "Semente de Tentáculo do Ender",
+  "item.endertendril.tendril_pearl": "Pérola de Tentáculo"
+}
